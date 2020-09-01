@@ -5,25 +5,29 @@ from tkinter import *
 from Account_Management import *
 
 
-class Application(Frame):
+class LoginGUI(Frame):
 
-    """ A GUI application"""
+    """ Login GUI """
     def __init__(self, master):
         """ Initialize the Frame """
-        super(Application, self).__init__(master)
+        super(LoginGUI, self).__init__(master)
         self.grid()
-        self.create_login()
+        self.create()
 
     def submit(self):
         username = self.username_ent.get()
         password = self.password_ent.get()
         Login(username, password)
+        self.quit()
 
     def signup(self):
-        print("signup")
-        return "signup"
+        root = Tk()
+        root.title("Budget Manager")
+        root.geometry("200x150")
+        app = SignupGUI(root)
+        root.mainloop()
 
-    def create_login(self):
+    def create(self):
         """ Create login page """
         # login title
         self.login_lbl = Label(self, text="Login")
@@ -50,8 +54,64 @@ class Application(Frame):
         self.submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
 
         # sign-up button
-        self.signup_bttn = Button(self, text="Sign-Up", command=self.signup)
-        self.signup_bttn.grid(row=3, column=2, columnspan=2, sticky=W)
+        self.signup_btn = Button(self, text="Sign-Up", command=self.signup)
+        self.signup_btn.grid(row=3, column=2, columnspan=2, sticky=W)
 
-    # def create_signup(self):
 
+class SignupGUI(Frame):
+
+    """ Signup GUI """
+    def __init__(self, master):
+        """ Initialize the Frame """
+        super(SignupGUI, self).__init__(master)
+        self.grid()
+        self.create()
+
+    def Signup(self):
+        fname = self.fname_ent.get()
+        lname = self.lname_ent.get()
+        username = self.user_ent.get()
+        password = self.password_ent.get()
+        Signup(fname, lname, username, password)
+
+    def create(self):
+        """ Create signup page """
+        # sign-up title
+        self.login_lbl = Label(self, text="Sign Up")
+        self.login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
+
+        # First name label
+        self.fname_lbl = Label(self, text="First Name: ")
+        self.fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
+
+        # First name entry
+        self.fname_ent = Entry(self)
+        self.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
+
+        # Last name label
+        self.lname_lbl = Label(self, text="Last Name: ")
+        self.lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
+
+        # Last name entry
+        self.lname_ent = Entry(self)
+        self.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
+
+        # username label
+        self.user_lbl = Label(self, text="Username: ")
+        self.user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
+
+        # username entry
+        self.user_ent = Entry(self)
+        self.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
+
+        # password label
+        self.password_lbl = Label(self, text="Password: ")
+        self.password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
+
+        # password entry
+        self.password_ent = Entry(self)
+        self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
+
+        # sign-up button
+        self.signup_btn = Button(self, text="Sign Up", command=self.Signup)
+        self.signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
