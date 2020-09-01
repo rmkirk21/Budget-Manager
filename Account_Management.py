@@ -36,8 +36,8 @@ class SignUp():
         self.lname = lname
 
     def CreateLogin(self):
-        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt', 'a'))
-        userdata.write(self.username + ':' + self.password)
+        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
+        userdata.write('\n' + self.username + ':' + self.password)
         userdata.close()
 
     def CheckSignUp(self):
