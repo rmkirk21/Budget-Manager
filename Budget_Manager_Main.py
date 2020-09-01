@@ -1,5 +1,9 @@
-print("Hello World")
-print(" OwO ")
-print("Branch Test")
-print("Im tired")
-input("Press enter to close...")
+# Main code
+
+from GUI import *
+
+# Open GUI
+root = Tk()
+root.title("Budget Manager")
+app = Application(root)
+root.mainloop()
