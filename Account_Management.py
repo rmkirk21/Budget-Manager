@@ -12,12 +12,18 @@ class Login():
         self.password = password
 
     def CheckLogin(self):
+        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'))
         for line in open(os.path.join(os.getcwd(), 'User_Data.txt')):
             if self.user == (line.split(':'))[0]:
                 if self.password == (line.split(':'))[1]:
+                    userdata.close()
                     return True
+                else:
+                    userdata.close()
+                    return False
+            else:
+                userdata.close()
                 return False
-            return False
 
 class SignUp():
 
@@ -27,9 +33,15 @@ class SignUp():
         self.fname = fname
         self.lname = lname
 
+    def CreateLogin(self):
+        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt', 'a'))
+        userdata.write(self.username + ':' + self.password)
+        userdata.close()
+
     def CheckSignUp(self):
         for line in open(os.path.join(os.getcwd(), 'User_Data.txt')):
-            if self.user == (line.split(':'))[0]:
-                if self.password == (line.split(':'))[1]:
-                    return False
+            if self.username == (line.split(':'))[0]:
                 return False
+            else:
+                self.CreateLogin()
+                return True

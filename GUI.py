@@ -72,7 +72,7 @@ class SignupGUI(Frame):
         lname = self.lname_ent.get()
         username = self.user_ent.get()
         password = self.password_ent.get()
-        Signup(fname, lname, username, password)
+        SignUp(fname, lname, username, password)
 
     def create(self):
         """ Create signup page """
