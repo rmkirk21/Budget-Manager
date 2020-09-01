@@ -15,9 +15,12 @@ class Application(Frame):
         self.create_login()
 
     def submit(self):
-        return "submit"
+        username = self.username_ent.get()
+        password = self.password_ent.get()
+        Login(username, password)
 
     def signup(self):
+        print("signup")
         return "signup"
 
     def create_login(self):
@@ -43,13 +46,12 @@ class Application(Frame):
         self.password_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
         # submit button
-        self.submit_bttn = Button(self)
-        self.submit_bttn["text"] = "Submit"
-        self.submit_bttn["command"] = self.submit()
+        self.submit_bttn = Button(self, text="Submit", command=self.submit)
         self.submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
 
         # sign-up button
-        self.signup_bttn = Button(self)
-        self.signup_bttn["text"] = "Sign Up"
-        self.signup_bttn["command"] = self.signup()
+        self.signup_bttn = Button(self, text="Sign-Up", command=self.signup)
         self.signup_bttn.grid(row=3, column=2, columnspan=2, sticky=W)
+
+    # def create_signup(self):
+
