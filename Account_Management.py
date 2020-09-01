@@ -41,9 +41,12 @@ class SignUp():
         userdata.close()
 
     def CheckSignUp(self):
+        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
         for line in open(os.path.join(os.getcwd(), 'User_Data.txt')):
             if self.username == (line.split(':'))[0]:
+                userdata.close()
                 return False
             else:
+                userdata.close()
                 self.CreateLogin()
                 return True
