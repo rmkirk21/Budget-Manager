@@ -3,6 +3,7 @@
 
 from tkinter import *
 from Account_Management import *
+import tkinter.messagebox
 
 
 class LoginGUI(Frame):
@@ -17,10 +18,17 @@ class LoginGUI(Frame):
     def submit(self):
         username = self.username_ent.get()
         password = self.password_ent.get()
-        Login(username, password)
-        self.quit()
+
+        if Login(username, password).CheckLogin():
+            self.quit()
+        else:
+            self.username_ent.delete(0, END)
+            self.password_ent.delete(0, END)
+            tkinter.messagebox.showinfo('ERROR :P', 'WRONG')
+
 
     def signup(self):
+        self.destroy()
         root = Tk()
         root.title("Budget Manager")
         root.geometry("200x150")
@@ -72,7 +80,12 @@ class SignupGUI(Frame):
         lname = self.lname_ent.get()
         username = self.user_ent.get()
         password = self.password_ent.get()
-        Signup(fname, lname, username, password)
+
+        if SignUp(fname, lname, username, password).CheckSignUp():
+            self.quit()
+            tkinter.messagebox.showinfo('YAY', 'New User Created')
+        else:
+            tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
 
     def create(self):
         """ Create signup page """
