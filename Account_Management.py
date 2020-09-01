@@ -19,12 +19,8 @@ class Login():
                 if self.password == (line.split(':'))[1]:
                     userdata.close()
                     return True
-                else:
-                    userdata.close()
-                    return False
-            else:
-                userdata.close()
-                return False
+        userdata.close()
+        return False
 
 
 class SignUp():
