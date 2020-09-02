@@ -6,5 +6,5 @@ from GUI import *
 root = Tk()
 root.title("Budget Manager")
 root.geometry("200x150")
-app = LoginGUI(root)
+app = GUI(root)
 root.mainloop()

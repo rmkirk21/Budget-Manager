@@ -6,14 +6,14 @@ from Account_Management import *
 import tkinter.messagebox
 
 
-class LoginGUI(Frame):
+class GUI(Frame):
 
     """ Login GUI """
     def __init__(self, master):
         """ Initialize the Frame """
-        super(LoginGUI, self).__init__(master)
+        super(GUI, self).__init__(master)
         self.grid()
-        self.create()
+        self.createLogin()
 
     def submit(self):
         username = self.username_ent.get()
@@ -26,16 +26,23 @@ class LoginGUI(Frame):
             self.password_ent.delete(0, END)
             tkinter.messagebox.showinfo('ERROR :P', 'WRONG')
 
-
     def signup(self):
         self.destroy()
-        root = Tk()
-        root.title("Budget Manager")
-        root.geometry("200x150")
-        app = SignupGUI(root)
-        root.mainloop()
+        self.createSignup()
 
-    def create(self):
+    def addNewUser(self):
+        fname = self.fname_ent.get()
+        lname = self.lname_ent.get()
+        username = self.user_ent.get()
+        password = self.password_ent.get()
+
+        if SignUp(fname, lname, username, password).CheckSignUp():
+            self.quit()
+            tkinter.messagebox.showinfo('YAY', 'New User Created')
+        else:
+            tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
+
+    def createLogin(self):
         """ Create login page """
         # login title
         self.login_lbl = Label(self, text="Login")
@@ -62,32 +69,10 @@ class LoginGUI(Frame):
         self.submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
 
         # sign-up button
-        self.signup_btn = Button(self, text="Sign-Up", command=self.signup)
+        self.signup_btn = Button(self, text="Sign-Up", command=self.createSignup)
         self.signup_btn.grid(row=3, column=2, columnspan=2, sticky=W)
 
-
-class SignupGUI(Frame):
-
-    """ Signup GUI """
-    def __init__(self, master):
-        """ Initialize the Frame """
-        super(SignupGUI, self).__init__(master)
-        self.grid()
-        self.create()
-
-    def Signup(self):
-        fname = self.fname_ent.get()
-        lname = self.lname_ent.get()
-        username = self.user_ent.get()
-        password = self.password_ent.get()
-
-        if SignUp(fname, lname, username, password).CheckSignUp():
-            self.quit()
-            tkinter.messagebox.showinfo('YAY', 'New User Created')
-        else:
-            tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
-
-    def create(self):
+    def createSignup(self):
         """ Create signup page """
         # sign-up title
         self.login_lbl = Label(self, text="Sign Up")
@@ -126,5 +111,5 @@ class SignupGUI(Frame):
         self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
 
         # sign-up button
-        self.signup_btn = Button(self, text="Sign Up", command=self.Signup)
+        self.signup_btn = Button(self, text="Sign Up", command=self.addNewUser())
         self.signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
