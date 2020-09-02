@@ -35,6 +35,9 @@ class SignUp():
         userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
         userdata.write('\n' + self.username + ':' + self.password)
         userdata.close()
+        newuser = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '.txt'), 'w+')
+        # input starting data for new user
+        newuser.close()
 
     def CheckSignUp(self):
         userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
