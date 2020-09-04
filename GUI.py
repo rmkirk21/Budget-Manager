@@ -25,6 +25,18 @@ class GUI(Frame):
             self.password_ent.delete(0, END)
             tkinter.messagebox.showinfo('ERROR :P', 'WRONG')
 
+    def signup(self):
+        fname = self.fname_ent.get()
+        lname = self.lname_ent.get()
+        username = self.user_ent.get()
+        password = self.password_ent.get()
+
+        if SignUp(fname, lname, username, password).CheckSignUp():
+            self.quit()
+            tkinter.messagebox.showinfo('YAY', 'New User Created')
+        else:
+            tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
+
     def create_main(self):
 
         # test for main page. will go more indepth later
@@ -74,41 +86,41 @@ class GUI(Frame):
         signup.title("Signup")
 
         # sign-up title
-        signup.login_lbl = Label(signup, text="Sign Up")
-        signup.login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
+        self.login_lbl = Label(signup, text="Sign Up")
+        self.login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
 
         # First name label
-        signup.fname_lbl = Label(signup, text="First Name: ")
-        signup.fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
+        self.fname_lbl = Label(signup, text="First Name: ")
+        self.fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
 
         # First name entry
-        signup.fname_ent = Entry(signup)
-        signup.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
+        self.fname_ent = Entry(signup)
+        self.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
 
         # Last name label
-        signup.lname_lbl = Label(signup, text="Last Name: ")
-        signup.lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
+        self.lname_lbl = Label(signup, text="Last Name: ")
+        self.lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
         # Last name entry
-        signup.lname_ent = Entry(signup)
-        signup.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
+        self.lname_ent = Entry(signup)
+        self.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
         # username label
-        signup.user_lbl = Label(signup, text="Username: ")
-        signup.user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
+        self.user_lbl = Label(signup, text="Username: ")
+        self.user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
 
         # username entry
-        signup.user_ent = Entry(signup)
-        signup.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
+        self.user_ent = Entry(signup)
+        self.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
 
         # password label
-        signup.password_lbl = Label(signup, text="Password: ")
-        signup.password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
+        self.password_lbl = Label(signup, text="Password: ")
+        self.password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
 
         # password entry
-        signup.password_ent = Entry(signup)
-        signup.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
+        self.password_ent = Entry(signup)
+        self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
 
         # sign-up button
-        signup.signup_btn = Button(signup, text="Sign Up")  # add command to button
-        signup.signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
+        self.signup_btn = Button(signup, text="Sign Up", command=self.signup)
+        self.signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
