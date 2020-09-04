@@ -30,18 +30,17 @@ class SignUp(): #Signs up new users
 
     def CreateLogin(self): #Creates data entries for new users
         userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
-        userdata.write('\n' + self.username + ':' + self.password) #Adds username and paassword to User_Data.txt
+        userdata.write('\n' + self.username + ':' + self.password) #Adds username and password to User_Data.txt
         userdata.close()
         newuser = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '.txt'), 'w+') #Creates new txt file for users budget information
-        # input starting data for each new user
         newuser.close()
 
     def CheckSignUp(self): #Checks if new users username is already used
-        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
+        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'))
         for line in userdata:
             if self.username == (line.split(':'))[0]:
                 userdata.close()
                 return False #Returns false if username is taken
         userdata.close()
-        self.CreateLogin()
-        return True #Returns true if username is available
+        self.CreateLogin() #Creates login if username is available
+        return True
