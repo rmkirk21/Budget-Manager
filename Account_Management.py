@@ -11,13 +11,13 @@ class Login():  # Logs in users who already have an account
         self.password = password
 
     def CheckLogin(self):  # Checks if login information is correct
-        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'))
-        for line in userdata:
-            if self.user == (line.split(':'))[0]:  # Checks if username is correct
-                if self.password == (line.split(':'))[1]:  # Checks if password is also correct
-                    userdata.close()
+        users = open(os.path.join(os.getcwd(), 'User_Data.txt'))
+        for line in users:
+            if self.user == (line.split('|'))[0]:  # Checks if username is correct
+                if self.password == (line.split('|'))[1]:  # Checks if password is also correct
+                    users.close()
                     return True  # Returns true if username and password are correct
-        userdata.close()
+        users.close()
         return False  # Returns false if username or password are incorrect
 
 
@@ -30,20 +30,20 @@ class SignUp():  # Signs up new users
         self.lname = lname
 
     def CreateLogin(self):  # Creates data entries for new users
-        userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
-        userdata.write('\n' + self.username + ':' + self.password)  # Adds username and password to User_Data.txt
-        userdata.close()
-        newuser = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '.txt'),
-                       'w+')  # Creates new txt file for users budget information
-        newuser.close()
+        users = open(os.path.join(os.getcwd(), 'User_Data.txt'), 'a')
+        users.write('\n' + self.username + '|' + self.password + '|')  # Adds username and password to User_Data.txt
+        users.close()
+        os.mkdir(os.getcwd() + '\\Users\\' + self.username)
+        transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'w+')
+        transactions.close()
 
     def CheckSignUp(self): #Checks if new users username is already used
-        if ':' in self.username or ':' in self.password: #Username and password cannot contain a colon
+        if '|' in self.username or '|' in self.password: #Username and password cannot contain a '|'
             return False
 
         userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'))
         for line in userdata:
-            if self.username == (line.split(':'))[0]:
+            if self.username == (line.split('|'))[0]:
                 userdata.close()
                 return False  # Returns false if username is taken
         userdata.close()
