@@ -11,7 +11,7 @@ class Login():  # Logs in users who already have an account
         self.password = password
 
     def CheckLogin(self):  # Checks if login information is correct
-        users = open(os.path.join(os.getcwd(), 'Users\\' + 'User_Data.txt'))
+        users = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'))
         for line in users:
             if self.user == (line.split('|'))[0]:  # Checks if username is correct
                 if self.password == (line.split('|'))[1]:  # Checks if password is also correct
@@ -30,7 +30,7 @@ class SignUp():  # Signs up new users
         self.lname = lname
 
     def CreateLogin(self):  # Creates data entries for new users
-        users = open(os.path.join(os.getcwd(), 'Users\\' + 'User_Data.txt'), 'a')
+        users = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'), 'a')
         users.write('\n' + self.username + '|' + self.password + '|')  # Adds username and password to User_Data.txt
         users.close()
         os.mkdir(os.getcwd() + '\\Users\\' + self.username)
@@ -40,7 +40,7 @@ class SignUp():  # Signs up new users
     def CheckSignUp(self): #Checks if new users username is already used
         if '|' in self.username or '|' in self.password: #Username and password cannot contain a '|'
             return False
-        userdata = open(os.path.join(os.getcwd(), 'Users\\' + 'User_Data.txt'))
+        userdata = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'))
         for line in userdata:
             if self.username.lower() == (line.split('|'))[0].lower():
                 userdata.close()
