@@ -37,7 +37,10 @@ class SignUp():  # Signs up new users
                        'w+')  # Creates new txt file for users budget information
         newuser.close()
 
-    def CheckSignUp(self):  # Checks if new users username is already used
+    def CheckSignUp(self): #Checks if new users username is already used
+        if ':' in self.username or ':' in self.password: #Username and password cannot contain a colon
+            return False
+
         userdata = open(os.path.join(os.getcwd(), 'User_Data.txt'))
         for line in userdata:
             if self.username == (line.split(':'))[0]:
