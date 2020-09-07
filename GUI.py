@@ -4,6 +4,7 @@
 from tkinter import *
 from Account_Management import *
 import tkinter.messagebox
+from datetime import date
 
 
 class GUI(Frame):
@@ -96,7 +97,7 @@ class GUI(Frame):
         password_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
         # password entry box
-        self.password_ent = Entry(login)
+        self.password_ent = Entry(login, show="*")
         self.password_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
         # submit button
@@ -144,7 +145,7 @@ class GUI(Frame):
         password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
 
         # password entry
-        self.password_ent = Entry(signup)
+        self.password_ent = Entry(signup, show="*")
         self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
 
         # sign-up button
@@ -180,6 +181,8 @@ class GUI(Frame):
         transactionDate_lbl.pack()
 
         # date of transaction entry box
+        today = date.today()
+        print(today)
         self.transactionDate_ent = Entry(addTransaction)
         self.transactionDate_ent.pack()
 
