@@ -49,26 +49,30 @@ class GUI(Frame):
     def create_main(self):
 
         # test for main page. will go more indepth later
-        self.welcome_lbl = Label(self, text="Welcome")
+        welcome_lbl = Label(self, text="Welcome")
         # use grid after first test
-        self.welcome_lbl.pack()
+        welcome_lbl.pack()
 
         # button to open login page
-        self.login_bttn = Button(self, text="Login", command=self.launch_login_window)
-        self.login_bttn.pack()
+        login_bttn = Button(self, text="Login", command=self.launch_login_window)
+        login_bttn.pack()
+
+        # transaction label
+        transaction_lbl = Label(self, text="Transactions")
+        transaction_lbl.pack()
 
         # display last 10 transactions
         """ Make sure to change text to the transactions """
-        self. transaction_text = Message(self, width=35, bg="#E0E0E0", text="Hello \n hi")
-        self.transaction_text.pack()
+        transaction_text = Message(self, width=35, bg="#E0E0E0", text="Hello \n hi")
+        transaction_text.pack()
 
         # button to display all transactions
-        self.viewTransactions_bttn = Button(self, text="View All Transactions", command=self.launch_transactions_window)
-        self.viewTransactions_bttn.pack()
+        viewTransactions_bttn = Button(self, text="View All Transactions", command=self.launch_transactions_window)
+        viewTransactions_bttn.pack()
 
         # button to add a transaction
-        self.addTransaction_bttn = Button(self, text="Add a Transaction", command=self.launch_addTransaction_window)
-        self.addTransaction_bttn.pack()
+        addTransaction_bttn = Button(self, text="Add a Transaction", command=self.launch_addTransaction_window)
+        addTransaction_bttn.pack()
 
     def launch_login_window(self):
         login = Toplevel()
