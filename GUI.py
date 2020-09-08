@@ -208,10 +208,15 @@ class GUI(Frame):
         transactionDate_lbl = Label(self.addTransaction, text="Date of Transaction")
         transactionDate_lbl.pack()
 
+        # date example label
+        dateExample_lbl = Label(self.addTransaction, text="MM-DD-YYYY")
+        dateExample_lbl.pack()
+
         # date of transaction entry box
-        today = date.today()
+        temp = str(date.today()).split("-")
+        today = (temp[1] + "-" + temp[2] + "-" + temp[0])
         print(today)
-        self.transactionDate_ent = Entry(self.addTransaction)
+        self.transactionDate_ent = Entry(self.addTransaction, text=today)
         self.transactionDate_ent.pack()
 
         # reason for transaction label
