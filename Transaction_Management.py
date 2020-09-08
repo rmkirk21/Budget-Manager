@@ -2,6 +2,7 @@
 # 9/6/2020
 
 import os
+import datetime
 
 class Transaction():
 
@@ -15,8 +16,13 @@ class Transaction():
 
     def TransactionHistory(self):
         history = []
+        dates, year, month, day = [], [], [], []
         transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'))
         for line in transactions:
-            history.append(line)
-        print(history)
-        return(history)
+            month = line.split('|')[0].split('-')[0]
+            day = line.split('|')[0].split('-')[1]
+            year = line.split('|')[0].split('-')[2]
+            dates.append(int(year + month + day))
+            history.append(line.split('|')[:3])
+        history = [history for _, history in sorted(zip(dates, history))]
+        return history
