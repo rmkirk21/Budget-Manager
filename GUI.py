@@ -42,6 +42,9 @@ class GUI(Frame):
             tkinter.messagebox.showinfo('ERROR :P',
                                         'You have failed to provide enough information. \nPlease try again :)')
         else:
+            self.transactionDate_ent.delete(0, END)
+            self.transactionReason_ent.delete(0, END)
+            self.transactionAmount_ent.delete(0, END)
             transaction = Transaction(self.username)
             transaction.AddTransaction(date, reason, amount)
 
@@ -129,6 +132,7 @@ class GUI(Frame):
             # close login window if true
             if self.Login:
                 self.LoginWindow = False
+                login.destroy()
                 # find way to close login window
 
     def launch_signup_window(self):
