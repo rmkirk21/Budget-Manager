@@ -73,7 +73,7 @@ class GUI(Frame):
             self.ERROR.not_enough_info_given()
 
     def newBudgetItem(self):
-        self.budget.add_budget_item(str(self.addBudgetItem_entry))
+        self.budget.add_budget_item(str(self.addBudgetItem_entry.get()))
 
     def create_main(self):
 
