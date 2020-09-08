@@ -1,6 +1,8 @@
 # manage transactions
 # 9/6/2020
 
+import os
+
 class Transaction():
 
     def __init__(self, username):
