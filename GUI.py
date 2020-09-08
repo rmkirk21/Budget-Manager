@@ -32,6 +32,10 @@ class GUI(Frame):
             self.password_ent.delete(0, END)
             tkinter.messagebox.showinfo('ERROR :P', 'WRONG')
 
+        # close login window if valid
+        if self.Login:
+            self.login.destroy()
+
     def submit_transaction(self):
         date = self.transactionDate_ent.get()
         reason = self.transactionReason_ent.get()
@@ -47,8 +51,9 @@ class GUI(Frame):
             self.transactionAmount_ent.delete(0, END)
             transaction = Transaction(self.username)
             transaction.AddTransaction(date, reason, amount)
+            self.addTransaction.destroy()
 
-    def signup(self):
+    def submit_signup(self):
         fname = self.fname_ent.get()
         lname = self.lname_ent.get()
         username = self.user_ent.get()
@@ -57,7 +62,7 @@ class GUI(Frame):
         if fname != "" and lname != "" and username != "" and password != "":   # if all entry boxes aren't empty
             if SignUp(fname, lname, username, password).CheckSignUp():
                 tkinter.messagebox.showinfo('YAY', 'New User Created')
-                self.SignupWindow = False
+                self.signup.destroy()
             else:
                 tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
         else:
@@ -97,88 +102,82 @@ class GUI(Frame):
     def launch_login_window(self):
         if not self.LoginWindow:
             self.LoginWindow = True
-            login = Toplevel()
-            login.title("Login")
-            login.geometry("200x300")
+            self.login = Toplevel(self.master)
+            self.login.title("Login")
+            self.login.geometry("200x300")
 
             # login title
-            login_lbl = Label(login, text="Login")
+            login_lbl = Label(self.login, text="Login")
             login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
 
             # username title
-            username_lbl = Label(login, text="Username: ")
+            username_lbl = Label(self.login, text="Username: ")
             username_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
 
             # username entry box
-            self.username_ent = Entry(login)
+            self.username_ent = Entry(self.login)
             self.username_ent.grid(row=1, column=1, columnspan=2, sticky=W)
 
             # password title
-            password_lbl = Label(login, text="Password: ")
+            password_lbl = Label(self.login, text="Password: ")
             password_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
             # password entry box
-            self.password_ent = Entry(login, show="*")
+            self.password_ent = Entry(self.login, show="*")
             self.password_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
             # submit button
-            submit_bttn = Button(login, text="Submit", command=self.submit_login)
+            submit_bttn = Button(self.login, text="Submit", command=self.submit_login)
             submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
 
             # sign-up button
-            signup_btn = Button(login, text="Sign-Up", command=self.launch_signup_window)
+            signup_btn = Button(self.login, text="Sign-Up", command=self.launch_signup_window)
             signup_btn.grid(row=3, column=2, columnspan=2, sticky=W)
-
-            # close login window if true
-            if self.Login:
-                self.LoginWindow = False
-                login.destroy()
-                # find way to close login window
 
     def launch_signup_window(self):
         if not self.SignupWindow:
             self.SignupWindow = True
-            signup = Toplevel()
-            signup.title("Signup")
+            self.signup = Toplevel()
+            self.signup.title("Signup")
 
             # sign-up title
-            login_lbl = Label(signup, text="Sign Up")
+            login_lbl = Label(self.signup, text="Sign Up")
             login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
 
             # First name label
-            fname_lbl = Label(signup, text="First Name: ")
+            fname_lbl = Label(self.signup, text="First Name: ")
             fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
 
             # First name entry
-            self.fname_ent = Entry(signup)
+            self.fname_ent = Entry(self.signup)
             self.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
 
             # Last name label
-            lname_lbl = Label(signup, text="Last Name: ")
+            lname_lbl = Label(self.signup, text="Last Name: ")
             lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
             # Last name entry
-            self.lname_ent = Entry(signup)
+            self.lname_ent = Entry(self.signup)
             self.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
             # username label
-            user_lbl = Label(signup, text="Username: ")
+            user_lbl = Label(self.signup, text="Username: ")
             user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
 
             # username entry
-            self.user_ent = Entry(signup)
+            self.user_ent = Entry(self.signup)
             self.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
 
             # password label
-            password_lbl = Label(signup, text="Password: ")
+            password_lbl = Label(self.signup, text="Password: ")
             password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
 
             # password entry
-            self.password_ent = Entry(signup, show="*")
+            self.password_ent = Entry(self.signup, show="*")
             self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
 
             # sign-up button
-            signup_btn = Button(signup, text="Sign Up", command=self.signup)
+            signup_btn = Button(self.signup, text="Sign Up", command=self.submit_signup)
             signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
 
     def launch_transactions_window(self):
@@ -201,39 +200,39 @@ class GUI(Frame):
         transaction_scroll.config(command=transaction_list.yview)
 
     def launch_addTransaction_window(self):
-        addTransaction = Toplevel()
-        addTransaction.title("Add Transaction")
-        addTransaction.geometry("200x300")
+        self.addTransaction = Toplevel()
+        self.addTransaction.title("Add Transaction")
+        self.addTransaction.geometry("200x300")
 
         # date of transaction label
-        transactionDate_lbl = Label(addTransaction, text="Date of Transaction")
+        transactionDate_lbl = Label(self.addTransaction, text="Date of Transaction")
         transactionDate_lbl.pack()
 
         # date of transaction entry box
         today = date.today()
         print(today)
-        self.transactionDate_ent = Entry(addTransaction)
+        self.transactionDate_ent = Entry(self.addTransaction)
         self.transactionDate_ent.pack()
 
         # reason for transaction label
-        transactionReason_lbl = Label(addTransaction, text="Reason For Transaction")
+        transactionReason_lbl = Label(self.addTransaction, text="Reason For Transaction")
         transactionReason_lbl.pack()
 
         # reason for transaction entry box
         """ May Change to a drop down menu later"""
         """ But entry box is easier than drop down for now"""
 
-        self.transactionReason_ent = Entry(addTransaction)
+        self.transactionReason_ent = Entry(self.addTransaction)
         self.transactionReason_ent.pack()
 
         # amount of transaction label
-        transactionAmount_lbl = Label(addTransaction, text="Amount of Transaction")
+        transactionAmount_lbl = Label(self.addTransaction, text="Amount of Transaction")
         transactionAmount_lbl.pack()
 
         # amount of transaction entry box
-        self.transactionAmount_ent = Entry(addTransaction)
+        self.transactionAmount_ent = Entry(self.addTransaction)
         self.transactionAmount_ent.pack()
 
         # submit transaction button
-        submitTransaction_bttn = Button(addTransaction, text="Submit", command=self.submit_transaction)
+        submitTransaction_bttn = Button(self.addTransaction, text="Submit", command=self.submit_transaction)
         submitTransaction_bttn.pack()
