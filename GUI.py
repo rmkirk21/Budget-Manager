@@ -3,6 +3,7 @@
 
 from tkinter import *
 from Account_Management import *
+from Transaction_Management import *
 import tkinter.messagebox
 from datetime import date
 
@@ -13,6 +14,9 @@ class GUI(Frame):
         """ Initialize the frame. """
         super(GUI, self).__init__(master)
         self.grid()
+        self.Login = False
+        self.LoginWindow, self.SignupWindow = False, False
+        self.username = ""
         self.create_main()
 
     def submit_login(self):
@@ -20,7 +24,9 @@ class GUI(Frame):
         password = self.password_ent.get()
 
         if Login(username, password).CheckLogin():
-            self.quit()
+            self.Login = True
+            self.username = username
+            self.finish_main()
         else:
             self.username_ent.delete(0, END)
             self.password_ent.delete(0, END)
@@ -33,7 +39,11 @@ class GUI(Frame):
 
         # check if entry boxes are empty and act accordingly
         if date == "" or reason == "" or amount == "":
-            tkinter.messagebox.showinfo('ERROR :P', 'You have failed to provide enough information. \nPlease try again :)')
+            tkinter.messagebox.showinfo('ERROR :P',
+                                        'You have failed to provide enough information. \nPlease try again :)')
+        else:
+            transaction = Transaction(self.username)
+            transaction.AddTransaction(date, reason, amount)
 
     def signup(self):
         fname = self.fname_ent.get()
@@ -41,11 +51,15 @@ class GUI(Frame):
         username = self.user_ent.get()
         password = self.password_ent.get()
 
-        if SignUp(fname, lname, username, password).CheckSignUp():
-            self.quit()
-            tkinter.messagebox.showinfo('YAY', 'New User Created')
+        if fname != "" and lname != "" and username != "" and password != "":   # if all entry boxes aren't empty
+            if SignUp(fname, lname, username, password).CheckSignUp():
+                tkinter.messagebox.showinfo('YAY', 'New User Created')
+                self.SignupWindow = False
+            else:
+                tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
         else:
-            tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
+            tkinter.messagebox.showinfo('ERROR :P',
+                                        'You have failed to provide enough information. \nPlease try again :)')
 
     def create_main(self):
 
@@ -57,6 +71,8 @@ class GUI(Frame):
         # button to open login page
         login_bttn = Button(self, text="Login", command=self.launch_login_window)
         login_bttn.pack()
+
+    def finish_main(self):
 
         # transaction label
         transaction_lbl = Label(self, text="Transactions")
@@ -76,81 +92,90 @@ class GUI(Frame):
         addTransaction_bttn.pack()
 
     def launch_login_window(self):
-        login = Toplevel()
-        login.title("Login")
-        login.geometry("200x300")
+        if not self.LoginWindow:
+            self.LoginWindow = True
+            login = Toplevel()
+            login.title("Login")
+            login.geometry("200x300")
 
-        # login title
-        login_lbl = Label(login, text="Login")
-        login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
+            # login title
+            login_lbl = Label(login, text="Login")
+            login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
 
-        # username title
-        username_lbl = Label(login, text="Username: ")
-        username_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
+            # username title
+            username_lbl = Label(login, text="Username: ")
+            username_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
 
-        # username entry box
-        self.username_ent = Entry(login)
-        self.username_ent.grid(row=1, column=1, columnspan=2, sticky=W)
+            # username entry box
+            self.username_ent = Entry(login)
+            self.username_ent.grid(row=1, column=1, columnspan=2, sticky=W)
 
-        # password title
-        password_lbl = Label(login, text="Password: ")
-        password_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
+            # password title
+            password_lbl = Label(login, text="Password: ")
+            password_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
-        # password entry box
-        self.password_ent = Entry(login, show="*")
-        self.password_ent.grid(row=2, column=1, columnspan=2, sticky=W)
+            # password entry box
+            self.password_ent = Entry(login, show="*")
+            self.password_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
-        # submit button
-        self.submit_bttn = Button(login, text="Submit", command=self.submit_login)
-        self.submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
+            # submit button
+            submit_bttn = Button(login, text="Submit", command=self.submit_login)
+            submit_bttn.grid(row=3, column=1, columnspan=1, sticky=W)
 
-        # sign-up button
-        self.signup_btn = Button(login, text="Sign-Up", command=self.launch_signup_window)
-        self.signup_btn.grid(row=3, column=2, columnspan=2, sticky=W)
+            # sign-up button
+            signup_btn = Button(login, text="Sign-Up", command=self.launch_signup_window)
+            signup_btn.grid(row=3, column=2, columnspan=2, sticky=W)
+
+            # close login window if true
+            if self.Login:
+                self.LoginWindow = False
+                # find way to close login window
 
     def launch_signup_window(self):
-        signup = Toplevel()
-        signup.title("Signup")
+        if not self.SignupWindow:
+            self.SignupWindow = True
+            signup = Toplevel()
+            signup.title("Signup")
 
-        # sign-up title
-        login_lbl = Label(signup, text="Sign Up")
-        login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
+            # sign-up title
+            login_lbl = Label(signup, text="Sign Up")
+            login_lbl.grid(row=0, column=1, columnspan=1, sticky=W)
 
-        # First name label
-        fname_lbl = Label(signup, text="First Name: ")
-        fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
+            # First name label
+            fname_lbl = Label(signup, text="First Name: ")
+            fname_lbl.grid(row=1, column=0, columnspan=1, sticky=W)
 
-        # First name entry
-        self.fname_ent = Entry(signup)
-        self.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
+            # First name entry
+            self.fname_ent = Entry(signup)
+            self.fname_ent.grid(row=1, column=1, columnspan=2, sticky=W)
 
-        # Last name label
-        lname_lbl = Label(signup, text="Last Name: ")
-        lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
+            # Last name label
+            lname_lbl = Label(signup, text="Last Name: ")
+            lname_lbl.grid(row=2, column=0, columnspan=1, sticky=W)
 
-        # Last name entry
-        self.lname_ent = Entry(signup)
-        self.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
+            # Last name entry
+            self.lname_ent = Entry(signup)
+            self.lname_ent.grid(row=2, column=1, columnspan=2, sticky=W)
 
-        # username label
-        user_lbl = Label(signup, text="Username: ")
-        user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
+            # username label
+            user_lbl = Label(signup, text="Username: ")
+            user_lbl.grid(row=3, column=0, columnspan=1, sticky=W)
 
-        # username entry
-        self.user_ent = Entry(signup)
-        self.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
+            # username entry
+            self.user_ent = Entry(signup)
+            self.user_ent.grid(row=3, column=1, columnspan=2, sticky=W)
 
-        # password label
-        password_lbl = Label(signup, text="Password: ")
-        password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
+            # password label
+            password_lbl = Label(signup, text="Password: ")
+            password_lbl.grid(row=4, column=0, columnspan=1, sticky=W)
 
-        # password entry
-        self.password_ent = Entry(signup, show="*")
-        self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
+            # password entry
+            self.password_ent = Entry(signup, show="*")
+            self.password_ent.grid(row=4, column=1, columnspan=2, sticky=W)
 
-        # sign-up button
-        signup_btn = Button(signup, text="Sign Up", command=self.signup)
-        signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
+            # sign-up button
+            signup_btn = Button(signup, text="Sign Up", command=self.signup)
+            signup_btn.grid(row=5, column=1, columnspan=1, sticky=W)
 
     def launch_transactions_window(self):
         history = Toplevel()
