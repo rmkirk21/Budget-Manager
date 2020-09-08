@@ -4,7 +4,8 @@
 from tkinter import *
 from Account_Management import *
 from Transaction_Management import *
-import tkinter.messagebox
+from Budget_Management import *
+from ERRORS import *
 from datetime import date
 
 
@@ -17,7 +18,9 @@ class GUI(Frame):
         self.Login = False
         self.LoginWindow, self.SignupWindow = False, False
         self.username = ""
-        self.transaction = Transaction(self.username)
+        self.transaction = None
+        self.budget = None
+        self.ERROR = Errors()
         self.create_main()
 
     def submit_login(self):
@@ -27,11 +30,13 @@ class GUI(Frame):
         if Login(username, password).CheckLogin():
             self.Login = True
             self.username = username
+            self.transaction = Transaction(username)
+            self.budget = Budget(username)
             self.finish_main()
         else:
             self.username_ent.delete(0, END)
             self.password_ent.delete(0, END)
-            tkinter.messagebox.showinfo('ERROR :P', 'WRONG')
+            self.ERROR.wrong_login()
 
         # close login window if valid
         if self.Login:
@@ -44,8 +49,7 @@ class GUI(Frame):
 
         # check if entry boxes are empty and act accordingly
         if date == "" or reason == "" or amount == "":
-            tkinter.messagebox.showinfo('ERROR :P',
-                                        'You have failed to provide enough information. \nPlease try again :)')
+            self.ERROR.not_enough_info_given()
         else:
             self.transactionDate_ent.delete(0, END)
             self.transactionReason_ent.delete(0, END)
@@ -64,10 +68,9 @@ class GUI(Frame):
                 tkinter.messagebox.showinfo('YAY', 'New User Created')
                 self.signup.destroy()
             else:
-                tkinter.messagebox.showinfo('ERROR :P', 'Already Exists')
+                self.ERROR.user_already_exists()
         else:
-            tkinter.messagebox.showinfo('ERROR :P',
-                                        'You have failed to provide enough information. \nPlease try again :)')
+            self.ERROR.not_enough_info_given()
 
     def create_main(self):
 
@@ -196,7 +199,7 @@ class GUI(Frame):
         # add transactions to list
         transactionHistory = self.transaction.TransactionHistory()
 
-        for i in range(transactionHistory):
+        for i in range(len(transactionHistory)):
             add = transactionHistory[i]
             transaction_list.insert(END, add)
 
