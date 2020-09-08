@@ -12,7 +12,7 @@ class Budget():
         self.username = username
 
     def add_budget_item(self, item):
-        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'w+')
+        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'a')
         itemfile.write(item + ', ')
         itemfile.close()
 
