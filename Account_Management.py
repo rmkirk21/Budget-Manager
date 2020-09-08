@@ -34,8 +34,10 @@ class SignUp():  # Signs up new users
         users.write('\n' + self.username + '|' + self.password + '|')  # Adds username and password to User_Data.txt
         users.close()
         os.mkdir(os.getcwd() + '\\Users\\' + self.username)
-        transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'w+')
-        transactions.close()
+        transactionfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'w+')
+        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'w+')
+        transactionfile.close()
+        itemfile.close()
 
     def CheckSignUp(self): #Checks if new users username is already used
         if '|' in self.username or '|' in self.password: #Username and password cannot contain a '|'
