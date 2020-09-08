@@ -72,6 +72,9 @@ class GUI(Frame):
         else:
             self.ERROR.not_enough_info_given()
 
+    def newBudgetItem(self):
+        self.budget.add_budget_item(str(self.addBudgetItem_entry))
+
     def create_main(self):
 
         # test for main page. will go more indepth later
@@ -101,6 +104,10 @@ class GUI(Frame):
         # button to add a transaction
         addTransaction_bttn = Button(self, text="Add a Transaction", command=self.launch_addTransaction_window)
         addTransaction_bttn.pack()
+
+        # add budget item
+        addBudgetItem_bttn = Button(self, text="Add Budget Item", command=self.launch_addBudgetItem_window)
+        addBudgetItem_bttn.pack()
 
     def launch_login_window(self):
         if not self.LoginWindow:
@@ -231,11 +238,8 @@ class GUI(Frame):
         transactionReason_lbl = Label(self.addTransaction, text="Reason For Transaction")
         transactionReason_lbl.pack()
 
-        # reason for transaction entry box
-        """ May Change to a drop down menu later"""
-        """ But entry box is easier than drop down for now"""
-
-        self.transactionReason_ent = Entry(self.addTransaction)
+        # reason for transaction
+        self.transactionReason_ent = OptionMenu(self.addTransaction, *self.budget.get_budget_items())
         self.transactionReason_ent.pack()
 
         # amount of transaction label
@@ -249,3 +253,15 @@ class GUI(Frame):
         # submit transaction button
         submitTransaction_bttn = Button(self.addTransaction, text="Submit", command=self.submit_transaction)
         submitTransaction_bttn.pack()
+
+    def launch_addBudgetItem_window(self):
+        self.budgetItem = Toplevel()
+        self.budgetItem.title("Add Budget Item")
+
+        # entry box for budget item
+        self.addBudgetItem_entry = Entry(self.budgetItem)
+        self.addBudgetItem_entry.pack()
+
+        # budget item submit button
+        submitBudgetItem_bttn = Button(self.budgetItem, text="Submit", command=self.newBudgetItem)
+        submitBudgetItem_bttn.pack()
