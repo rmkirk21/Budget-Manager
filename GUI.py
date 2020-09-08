@@ -17,6 +17,7 @@ class GUI(Frame):
         self.Login = False
         self.LoginWindow, self.SignupWindow = False, False
         self.username = ""
+        self.transaction = Transaction(self.username)
         self.create_main()
 
     def submit_login(self):
@@ -49,8 +50,7 @@ class GUI(Frame):
             self.transactionDate_ent.delete(0, END)
             self.transactionReason_ent.delete(0, END)
             self.transactionAmount_ent.delete(0, END)
-            transaction = Transaction(self.username)
-            transaction.AddTransaction(date, reason, amount)
+            self.transaction.AddTransaction(date, reason, amount)
             self.addTransaction.destroy()
 
     def submit_signup(self):
@@ -193,9 +193,14 @@ class GUI(Frame):
         transaction_scroll = Scrollbar(history)
         transaction_scroll.pack(side=RIGHT, fill=BOTH)
 
-        for values in range(100):
-            transaction_list.insert(END, values)
+        # add transactions to list
+        transactionHistory = self.transaction.TransactionHistory()
 
+        for i in range(transactionHistory):
+            add = transactionHistory[i]
+            transaction_list.insert(END, add)
+
+        # scroll bar thing
         transaction_list.config(yscrollcommand=transaction_scroll.set)
         transaction_scroll.config(command=transaction_list.yview)
 
@@ -208,10 +213,15 @@ class GUI(Frame):
         transactionDate_lbl = Label(self.addTransaction, text="Date of Transaction")
         transactionDate_lbl.pack()
 
+        # date example label
+        dateExample_lbl = Label(self.addTransaction, text="MM-DD-YYYY")
+        dateExample_lbl.pack()
+
         # date of transaction entry box
-        today = date.today()
+        temp = str(date.today()).split("-")
+        today = (temp[1] + "-" + temp[2] + "-" + temp[0])
         print(today)
-        self.transactionDate_ent = Entry(self.addTransaction)
+        self.transactionDate_ent = Entry(self.addTransaction, text=today)
         self.transactionDate_ent.pack()
 
         # reason for transaction label
