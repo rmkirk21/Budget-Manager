@@ -129,6 +129,7 @@ class GUI(Frame):
             # close login window if true
             if self.Login:
                 self.LoginWindow = False
+                login.destroy()
                 # find way to close login window
 
     def launch_signup_window(self):
