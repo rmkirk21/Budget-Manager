@@ -239,7 +239,9 @@ class GUI(Frame):
         transactionReason_lbl.pack()
 
         # reason for transaction
-        self.transactionReason_ent = OptionMenu(self.addTransaction, *self.budget.get_budget_items())
+        items = self.budget.get_budget_items()
+        print(items)
+        self.transactionReason_ent = OptionMenu(self.addTransaction, )
         self.transactionReason_ent.pack()
 
         # amount of transaction label
