@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>View Transactions</title>
 </head>
+<header>
+    <p><a href="home">Home</a></p>
+    <p><a href="viewTransaction">View Transactions</a></p>
+    <p><a href="logout">Logout</a></p>
+</header>
 <body>
     <h1>Transactions</h1>
     {% for x in session["recent_transactions"] %}
