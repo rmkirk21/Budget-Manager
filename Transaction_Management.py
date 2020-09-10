@@ -28,5 +28,5 @@ class Transaction():
             year = line.split('|')[0].split('-')[2]
             dates.append(int(year + month + day))
             history.append(line.split('|')[:3])
-        history = [history for _, history in sorted(zip(dates, history))]
-        return history
+        history = [history for _, history in sorted((zip(dates, history)))]
+        return [ele for ele in reversed(history)]
