@@ -10,9 +10,13 @@ class Transaction():
         self.username = username
 
     def AddTransaction(self, date, reason, amount):
-        transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'a')
-        transactions.write('\n' + date + '|' + reason + '|' + amount + '|')
-        transactions.close()
+        if '' == date or '' == reason or '' == amount:
+            return False
+        else:
+            transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'a')
+            transactions.write('\n' + date + '|' + reason + '|' + amount + '|')
+            transactions.close()
+            return True
 
     def TransactionHistory(self):
         history = []
