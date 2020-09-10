@@ -64,6 +64,7 @@ def addTransaction():
 
 @app.route("/viewTransaction", methods=["POST", "GET"])
 def viewTransactions():
+    session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
     return render_template("viewTransactions.html")
 
 
