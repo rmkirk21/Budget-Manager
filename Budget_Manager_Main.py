@@ -53,6 +53,7 @@ def addTransaction():
 
         # try and add transaction
         if Transaction(session["username"]).AddTransaction(date, reason, amount):
+            session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
             return redirect(url_for("home"))
         else:
             # add a failed to login message in future
