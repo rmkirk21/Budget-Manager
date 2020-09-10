@@ -44,6 +44,20 @@ def home():
         return render_template("home.html")
 
 
+@app.route("/logout", methods=["POST", "GET"])
+def logout():
+    if request.method == "POST":
+        if "yes_logout" in request.form:
+            session.clear()
+            return redirect(url_for("login"))
+        elif "no_logout" in request.form:
+            return redirect(url_for("home"))
+        else:
+            return render_template("logout.html")
+    else:
+        return render_template("logout.html")
+
+
 @app.route("/addTransaction", methods=["POST", "GET"])
 def addTransaction():
     if request.method == "POST":
@@ -64,8 +78,8 @@ def addTransaction():
 
 @app.route("/viewTransaction", methods=["POST", "GET"])
 def viewTransactions():
+    session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
     return render_template("viewTransactions.html")
-
 
 
 if __name__ == "__main__":
