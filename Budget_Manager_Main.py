@@ -1,71 +1,55 @@
 # Main code
 
-from GUI import *
 from flask import Flask, redirect, url_for, render_template, request, session
+from Account_Management import *
+from Transaction_Management import *
+from Budget_Management import *
+
 
 app = Flask(__name__)
 app.secret_key = "2020"
 
 
+# create and run website
 @app.route("/", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
         session["username"] = request.form["username"]
         session["password"] = request.form["password"]
-        return redirect(url_for("home"))
+
+        # check login info
+        if Login(session["username"], session["password"]).CheckLogin():
+            return redirect(url_for("home"))
+        else:
+            # add a failed to login message in future
+            return render_template("login.html")
     else:
         return render_template("login.html")
 
 
 @app.route("/home")
 def home():
-    user = request.args.get('username')
+    # get users transactions
+    session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
+
     return render_template("home.html", username=session["username"])
+
+
+@app.route("/addTransaction")
+def add_transaction():
+    if request.method == "POST":
+        date = request.form["date"]
+        reason = request.form["reason"]
+        amount = request.form["amount"]
+
+
+
+    else:
+        return render_template("addTransaction.html")
+
+
+
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Open GUI
-# root = Tk()
-# root.title("Budget Manager")
-# root.geometry("600x500")
-# app = GUI(root)
-# root.mainloop()
