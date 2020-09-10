@@ -18,4 +18,5 @@ class Budget():
 
     def get_budget_items(self):
         itemfile = str(open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'r'))
+        print(itemfile.split(', '))
         return itemfile.split(', ')
