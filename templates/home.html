@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, {{username}}</h1>
+    <h3>Transactions</h3>
+    {% for x in session["recent_transactions"] %}
+    <p>{{x}}</p>
+    {% endfor %}
+</body>
+</html>
