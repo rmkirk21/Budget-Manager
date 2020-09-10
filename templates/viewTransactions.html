@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Transactions</title>
+</head>
+<body>
+    <h1>Transactions</h1>
+    {% for x in session["recent_transactions"] %}
+    <p>{{x}}</p>
+    {% endfor %}
+</body>
+</html>

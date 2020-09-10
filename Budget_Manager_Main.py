@@ -27,20 +27,25 @@ def login():
         return render_template("login.html")
 
 
-@app.route("/home")
+@app.route("/home", methods=["POST", "GET"])
 def home():
     # get users transactions
     session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
 
-    # figure out how to add transaction
+    # transaction options
     if request.method == "POST":
-        return redirect(url_for("add_transaction"))
+        if "add_transaction" in request.form:
+            return redirect(url_for("addTransaction"))
+        elif "view_transactions" in request.form:
+            return redirect(url_for("viewTransactions"))
+        else:
+            return render_template("home.html")
     else:
-        return render_template("home.html", username=session["username"])
+        return render_template("home.html")
 
 
-@app.route("/addTransaction")
-def add_transaction():
+@app.route("/addTransaction", methods=["POST", "GET"])
+def addTransaction():
     if request.method == "POST":
         date = request.form["date"]
         reason = request.form["reason"]
@@ -56,6 +61,9 @@ def add_transaction():
         return render_template("addTransaction.html")
 
 
+@app.route("/viewTransaction", methods=["POST", "GET"])
+def viewTransactions():
+    return render_template("viewTransactions.html")
 
 
 
