@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
+<header>
+    <p><a href="home">Home</a></p>
+    <p><a href="viewTransaction">View Transactions</a></p>
+</header>
 <body>
-    <h1>Welcome, {{username}}</h1>
+    <h1>Welcome, {{session["username"]}}</h1>
     <h3>Transactions</h3>
-    {% for x in session["recent_transactions"] %}
-    <p>{{x}}</p>
+    {% for x in range(5) %}
+    <p>{{session["recent_transactions"][x]}}</p>
     {% endfor %}
-    <p><input type="submit" value="Add Transaction"></p>
+    <form action="#" method="post">
+        <p><input type="submit" name="view_transactions" value="View Transactions"></p>
+        <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
+    </form>
 </body>
 </html>
