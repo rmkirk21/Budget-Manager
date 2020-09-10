@@ -14,17 +14,39 @@ app.secret_key = "2020"
 @app.route("/", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        session["username"] = request.form["username"]
-        session["password"] = request.form["password"]
+        if "login" in request.form:
+            session["username"] = request.form["username"]
+            session["password"] = request.form["password"]
 
-        # check login info
-        if Login(session["username"], session["password"]).CheckLogin():
-            return redirect(url_for("home"))
+            # check login info
+            if Login(session["username"], session["password"]).CheckLogin():
+                return redirect(url_for("home"))
+            else:
+                # add a failed to login message in future
+                return render_template("login.html")
+        elif "signup" in request.form:
+            return redirect(url_for("signup"))
         else:
-            # add a failed to login message in future
             return render_template("login.html")
     else:
         return render_template("login.html")
+
+
+@app.route("/signup", methods=["POST", "GET"])
+def signup():
+    if request.method == "POST":
+        fname = request.form["fname"]
+        lname = request.form["lname"]
+        username = request.form["username"]
+        password = request.form["password"]
+
+        # create account
+        if SignUp(fname, lname, username, password).CheckSignUp():
+            return redirect(url_for("login"))
+        else:
+            return render_template("signup.html")
+    else:
+        return render_template("signup.html")
 
 
 @app.route("/home", methods=["POST", "GET"])
