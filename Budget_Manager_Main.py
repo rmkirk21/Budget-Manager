@@ -60,6 +60,10 @@ def home():
             return redirect(url_for("addTransaction"))
         elif "view_transactions" in request.form:
             return redirect(url_for("viewTransactions"))
+        elif "view_previous_months" in request.form:
+            return redirect(url_for("previousMonths"))
+        elif "edit_budget" in request.form:
+            return redirect(url_for("editBudget"))
         else:
             return render_template("home.html")
     else:
@@ -102,6 +106,31 @@ def addTransaction():
 def viewTransactions():
     session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
     return render_template("viewTransactions.html")
+
+
+@app.route("/previousMonths", methods=["POST", "GET"])
+def previousMonths():
+    return render_template("previousMonths.html")
+
+
+@app.route("/editBudget", methods=["POST", "GET"])
+def editBudget():
+    if request.method == "POST":
+        if "add_budgetItem" in request.form:
+            return redirect(url_for("addBudgetItem"))
+        else:
+            return render_template("editBudget.html")
+    else:
+        return render_template("editBudget.html")
+
+
+@app.route("/addBudgetItem", methods=["POST", "GET"])
+def addBudgetItem():
+    if request.method == "POST":
+        # what to do with the information given
+        pass
+    else:
+        return render_template("addBudgetItem.html")
 
 
 if __name__ == "__main__":
