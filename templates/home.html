@@ -10,14 +10,30 @@
     <p><a href="logout">Logout</a></p>
 </header>
 <body>
-    <h1>Welcome, {{session["username"]}}</h1>
-    <h3>Transactions</h3>
-    {% for x in range(5) %}
-    <p>{{session["recent_transactions"][x]}}</p>
-    {% endfor %}
-    <form action="#" method="post">
-        <p><input type="submit" name="view_transactions" value="View Transactions"></p>
-        <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
-    </form>
+    <div class="wraper">
+        <h1>Welcome, {{session["username"]}}</h1>
+        <div class="home_transactions">
+            <h3>Transactions</h3>
+            {% for x in range(5) %}
+            <p>{{session["recent_transactions"][x]}}</p>
+            {% endfor %}
+            <form action="#" method="post">
+                <p><input type="submit" name="view_transactions" value="View Transactions"></p>
+                <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
+            </form>
+        </div>
+        <div class="home_overview">
+<!--     Display the users expenses compared to the set budget with ability to look back at previous months  -->
+            <form action="#" method="post">
+                <p><input type="submit" name="view_previous_months" value="View Previous Months"></p>
+            </form>
+        </div>
+        <div class="home_budget">
+<!--     Display the current "budget" with a button that takes you to a screen to modify budget       -->
+            <form action="#" method="post">
+                <p><input type="submit" name="edit_budget" value="Edit Budget"></p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
