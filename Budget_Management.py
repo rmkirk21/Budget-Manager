@@ -11,14 +11,17 @@ class Budget():
     def __init__(self, username):
         self.username = username
 
-    def add_budget_item(self, item):
+    def add_budget_item(self, item, amount):
         itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'a')
-        itemfile.write(', ' + item)
+        itemfile.write('\n' + item + '|' + amount + '|')
         itemfile.close()
 
     def get_budget_items(self):
         itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'r')
-        items = itemfile.read().split(', ')
+        items, cost = [], []
+        for line in itemfile:
+            items.append(line.split('|')[0])
+            cost.append(line.split('|')[1])
         itemfile.close()
         print(items)
-        return items
+        return items, cost
