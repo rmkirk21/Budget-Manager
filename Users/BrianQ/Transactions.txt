@@ -2,5 +2,5 @@
 09-28-2003|New keyboard|80 USD|
 11-02-2020|Makeup for Ryan|478 USD|
 03-16-2008|New car|150000 USD|
-09-10-2020|poop|0.003173|
 09-10-2020|Skyblock money|100|
+09-11-2020|Investments|50%|
