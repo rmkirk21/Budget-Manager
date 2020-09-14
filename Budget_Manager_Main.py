@@ -119,6 +119,7 @@ def editBudget():
         if "add_budgetItem" in request.form:
             return redirect(url_for("addBudgetItem"))
         else:
+            session["budget_items"] = Budget(session["username"]).get_budget_items()
             return render_template("editBudget.html")
     else:
         session["budget_items"] = Budget(session["username"]).get_budget_items()
