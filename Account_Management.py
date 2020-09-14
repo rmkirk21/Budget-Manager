@@ -39,8 +39,8 @@ class SignUp():  # Signs up new users
         transactionfile.close()
         itemfile.close()
 
-    def CheckSignUp(self): #Checks if new users username is already used
-        if '|' in self.username or '|' in self.password: #Username and password cannot contain a '|'
+    def CheckSignUp(self):  # Checks if new users username is already used
+        if '|' in self.username or '|' in self.password:    # Username and password cannot contain a '|'
             return False
         userdata = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'))
         for line in userdata:

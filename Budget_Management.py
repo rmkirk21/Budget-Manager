@@ -6,6 +6,7 @@
 
 import os
 
+
 class Budget():
 
     def __init__(self, username):
