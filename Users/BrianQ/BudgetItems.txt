@@ -1,4 +1,3 @@
-Pepsi|30|
-Coffee|50|
-Gas|150|
-Phone bill|50|
+ryans life|.20|
+Brazil|30|
+gas|68|
