@@ -1,1 +1,4 @@
-Food|250|
+Food|200|
+Gas|50|
+Guns|500|
+Drugs|50|
