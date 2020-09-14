@@ -19,8 +19,7 @@ class Transaction():
             return True
 
     def TransactionHistory(self):
-        history = []
-        dates, year, month, day = [], [], [], []
+        history, dates, year, month, day = [], [], [], [], []
         transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'))
         for line in transactions:
             month = line.split('|')[0].split('-')[0]
@@ -31,3 +30,14 @@ class Transaction():
         transactions.close()
         history = [history for _, history in sorted((zip(dates, history)))]
         return [ele for ele in reversed(history)]
+
+    def MonthlyTransactionHistory(self, month, year):
+        history, dates = [], []
+        transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'))
+        for line in transactions:
+            if month == line.split('|')[0].split('-')[0] and year == line.split('|')[0].split('-')[2]:
+                history.append(line.split('|')[:3])
+                dates.append(int(year + month))
+            transactions.close()
+            history = [history for _, history in sorted((zip(dates, history)))]
+            return [ele for ele in reversed(history)]

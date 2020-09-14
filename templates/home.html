@@ -3,21 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="../static/styles/normalize.css?q=1280549780">
+    <link rel="stylesheet" href="../static/styles/style.css?q=1280549780">
+    <link rel="stylesheet" href="../static/styles/home.css?q=1280549780">
 </head>
-<header>
-    <p><a href="home">Home</a></p>
-    <p><a href="viewTransaction">View Transactions</a></p>
-    <p><a href="logout">Logout</a></p>
-</header>
 <body>
-    <h1>Welcome, {{session["username"]}}</h1>
-    <h3>Transactions</h3>
-    {% for x in range(5) %}
-    <p>{{session["recent_transactions"][x]}}</p>
-    {% endfor %}
-    <form action="#" method="post">
-        <p><input type="submit" name="view_transactions" value="View Transactions"></p>
-        <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
-    </form>
+    <div class="wrapper">
+        <header>
+            <h1 class="header_name">Budget Manager</h1>
+            <p class="header_items"><a href="home">Home</a></p>
+            <p class="header_items"><a href="viewTransaction">View Transactions</a></p>
+            <p class="header_items"><a href="logout">Logout</a></p>
+        </header>
+        <main>
+            <div class="wraper">
+                <h1>Welcome, {{session["username"]}}</h1>
+                <div class="home_transactions">
+                    <h3>Transactions</h3>
+                    {% for x in range(5) %}
+                    <p>{{session["recent_transactions"][x]}}</p>
+                    {% endfor %}
+                    <form action="#" method="post">
+                        <p><input type="submit" name="view_transactions" value="View Transactions"></p>
+                        <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
+                    </form>
+                </div>
+                <div class="home_overview">
+        <!--     Display the users expenses compared to the set budget with ability to look back at previous months  -->
+                    <form action="#" method="post">
+                        <p><input type="submit" name="view_previous_months" value="View Previous Months"></p>
+                    </form>
+                </div>
+                <div class="home_budget">
+        <!--     Display the current "budget" with a button that takes you to a screen to modify budget       -->
+                    <form action="#" method="post">
+                        <p><input type="submit" name="edit_budget" value="Edit Budget"></p>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

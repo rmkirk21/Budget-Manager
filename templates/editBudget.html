@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Transactions</title>
+    <title>Edit Budget</title>
 </head>
 <body>
     <div class="wrapper">
@@ -12,10 +12,11 @@
             <p><a href="logout">Logout</a></p>
         </header>
         <main>
-            <h1>Transactions</h1>
-            {% for x in session["recent_transactions"] %}
-            <p>{{x}}</p>
-            {% endfor %}
+            <h1>Your Current Budget</h1>
+            <p> Display users current budget here </p>
+            <form action="#" method="post">
+                <p><input type="submit" name="add_budgetItem" value="Add Budget Item"></p>
+            </form>
         </main>
     </div>
 </body>
