@@ -1,1 +1,4 @@
-, fecal matter, ryans heart, food, fuel, pepsi
+Pepsi|30|
+Coffee|50|
+Gas|150|
+Phone bill|50|

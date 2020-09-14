@@ -18,11 +18,9 @@ class Budget():
         itemfile.close()
 
     def get_budget_items(self):
-        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'r')
-        items, cost = [], []
+        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'))
+        items = []
         for line in itemfile:
-            items.append(line.split('|')[0])
-            cost.append(line.split('|')[1])
+            items.append(line.split('|')[:2])
         itemfile.close()
-        print(items)
-        return items, cost
+        return items
