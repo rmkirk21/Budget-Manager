@@ -21,10 +21,10 @@ class Budget():
                 dup = linenum
         if dup != '':
             del itemdata[dup]
-        itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'w+')
-        for line in itemdata:
-            itemfile.write(line)
-        itemfile.close()
+            itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'w+')
+            for line in itemdata:
+                itemfile.write(line)
+            itemfile.close()
         itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'a')
         itemfile.write(item + '|' + amount + '|\n')
         itemfile.close()
