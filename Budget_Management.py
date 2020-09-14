@@ -6,7 +6,6 @@
 
 import os
 
-
 class Budget():
 
     def __init__(self, username):
@@ -35,7 +34,7 @@ class Budget():
         items, cost = [], []
         for line in itemfile:
             items.append(line.split('|')[:2])
-            cost.append(line.split('|')[1])
+            cost.append(float(line.split('|')[1]))
         itemfile.close()
         items = [items for _, items in sorted((zip(cost, items)))]
         return [ele for ele in reversed(items)]

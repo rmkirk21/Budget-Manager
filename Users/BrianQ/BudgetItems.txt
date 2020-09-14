@@ -1,3 +1,4 @@
 ryans life|.20|
 Brazil|30|
-gas|68|
+nothing|32|
+gas|70|
