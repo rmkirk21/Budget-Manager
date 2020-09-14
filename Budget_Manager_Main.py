@@ -121,14 +121,17 @@ def editBudget():
         else:
             return render_template("editBudget.html")
     else:
+        session["budget_items"] = Budget(session["username"]).get_budget_items()
         return render_template("editBudget.html")
 
 
 @app.route("/addBudgetItem", methods=["POST", "GET"])
 def addBudgetItem():
     if request.method == "POST":
-        # what to do with the information given
-        pass
+        reason = request.form["reason"]
+        value = request.form["value"]
+        Budget(session["username"]).add_budget_item(reason, value)
+        session["budget_items"] = Budget(session["username"]).get_budget_items()
     else:
         return render_template("addBudgetItem.html")
 
