@@ -38,4 +38,4 @@ class Budget():
             cost.append(line.split('|')[1])
         itemfile.close()
         items = [items for _, items in sorted((zip(cost, items)))]
-        return items
+        return [ele for ele in reversed(items)]
