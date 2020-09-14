@@ -31,7 +31,7 @@ class SignUp():  # Signs up new users
 
     def CreateLogin(self):  # Creates data entries for new users
         users = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'), 'a')
-        users.write('\n' + self.username + '|' + self.password + '|' + self.fname + '|' + self.lname + '|')  # Adds username and password to User_Data.txt
+        users.write(self.username + '|' + self.password + '|' + self.fname + '|' + self.lname + '|\n')  # Adds username and password to User_Data.txt
         users.close()
         os.mkdir(os.getcwd() + '\\Users\\' + self.username)
         transactionfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'w+')
@@ -50,12 +50,3 @@ class SignUp():  # Signs up new users
         userdata.close()
         self.CreateLogin()  # Creates login if username is available
         return True
-
-
-class UserData():
-
-    def GetName(self, username):
-        userdata = open(os.path.join(os.getcwd(), 'Users\\User_Data.txt'))
-        for line in userdata:
-            if self.username.lower() == (line.split('|'))[0].lower():
-                return(line.split('|')[2], line.split('|')[3])

@@ -14,7 +14,7 @@ class Transaction():
             return False
         else:
             transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'a')
-            transactions.write('\n' + date + '|' + reason + '|' + amount + '|')
+            transactions.write(date + '|' + reason + '|' + amount + '|\n')
             transactions.close()
             return True
 
@@ -41,3 +41,4 @@ class Transaction():
             transactions.close()
             history = [history for _, history in sorted((zip(dates, history)))]
             return [ele for ele in reversed(history)]
+
