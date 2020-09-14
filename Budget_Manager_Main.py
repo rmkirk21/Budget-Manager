@@ -133,6 +133,7 @@ def addBudgetItem():
         value = request.form["value"]
         Budget(session["username"]).add_budget_item(reason, value)
         session["budget_items"] = Budget(session["username"]).get_budget_items()
+        return redirect(url_for("editBudget"))
     else:
         return render_template("addBudgetItem.html")
 
