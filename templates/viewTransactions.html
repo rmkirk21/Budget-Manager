@@ -17,7 +17,7 @@
         </nav>
         <main>
             <h1>Transactions</h1>
-            {% for x in session["recent_transactions"] %}
+            {% for x in session["transaction_months"] %}
             <p>{{x}}</p>
             {% endfor %}
         </main>
