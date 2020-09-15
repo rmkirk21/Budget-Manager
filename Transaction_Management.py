@@ -41,3 +41,13 @@ class Transaction():
         transactions.close()
         history = [history for _, history in sorted((zip(dates, history)))]
         return history
+
+    def TransactionsMonths(self):
+        transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'))
+        dates = []
+        sort = []
+        for line in transactions:
+            dates.append([line.split('|')[0].split('-')[0], line.split('|')[0].split('-')[2]])
+            sort.append(int(line.split('|')[0].split('-')[2] + line.split('|')[0].split('-')[0]))
+        dates = [dates for _, dates in sorted((zip(sort, dates)))]
+        return set(map(tuple, dates))
