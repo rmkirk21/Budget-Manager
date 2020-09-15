@@ -2,7 +2,7 @@
 # 9/6/2020
 
 import os
-import datetime
+from collections import OrderedDict
 
 class Transaction():
 
@@ -46,8 +46,11 @@ class Transaction():
         transactions = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'))
         dates = []
         sort = []
+        newdates = []
         for line in transactions:
             dates.append([line.split('|')[0].split('-')[0], line.split('|')[0].split('-')[2]])
             sort.append(int(line.split('|')[0].split('-')[2] + line.split('|')[0].split('-')[0]))
-        dates = [dates for _, dates in sorted((zip(sort, dates)))]
-        return set(map(tuple, dates))
+        dates = [dates for _, dates in reversed(sorted((zip(sort, dates))))]
+        for line in OrderedDict((tuple(x), x) for x in dates).values():
+            newdates.append(line)
+        return newdates
