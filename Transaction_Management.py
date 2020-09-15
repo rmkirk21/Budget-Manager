@@ -38,7 +38,6 @@ class Transaction():
             if month == line.split('|')[0].split('-')[0] and year == line.split('|')[0].split('-')[2]:
                 history.append(line.split('|')[:3])
                 dates.append(int(year + month))
-            transactions.close()
-            history = [history for _, history in sorted((zip(dates, history)))]
-            return [ele for ele in reversed(history)]
-
+        transactions.close()
+        history = [history for _, history in sorted((zip(dates, history)))]
+        return history
