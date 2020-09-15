@@ -105,7 +105,8 @@ def addTransaction():
 
 @app.route("/viewTransaction", methods=["POST", "GET"])
 def viewTransactions():
-    session["recent_transactions"] = Transaction(session["username"]).MonthlyTransactionHistory("09", "2020")
+    session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
+    session["transaction_months"] = Transaction(session["username"]).TransactionsMonths()
     return render_template("viewTransactions.html")
 
 
