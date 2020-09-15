@@ -2,4 +2,4 @@ ryans life|.20|
 Brazil|30|
 nothing|32|
 gas|75|
-euroS|11|
+Euros|45|
