@@ -51,8 +51,9 @@ def signup():
 
 @app.route("/home", methods=["POST", "GET"])
 def home():
-    # get users transactions
+    # get users info
     session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
+    session["budget_items"] = Budget(session["username"]).get_budget_items()
 
     # transaction options
     if request.method == "POST":
@@ -104,7 +105,7 @@ def addTransaction():
 
 @app.route("/viewTransaction", methods=["POST", "GET"])
 def viewTransactions():
-    session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
+    session["recent_transactions"] = Transaction(session["username"]).MonthlyTransactionHistory("09", "2020")
     return render_template("viewTransactions.html")
 
 
