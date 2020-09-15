@@ -36,6 +36,7 @@ class SignUp():  # Signs up new users
         os.mkdir(os.getcwd() + '\\Users\\' + self.username)
         transactionfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Transactions.txt'), 'w+')
         itemfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\BudgetItems.txt'), 'w+')
+        categoryfile = open(os.path.join(os.getcwd(), 'Users\\' + self.username + '\\Categories.txt'), 'w+')
         transactionfile.close()
         itemfile.close()
 
