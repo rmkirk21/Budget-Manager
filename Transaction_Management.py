@@ -50,4 +50,4 @@ class Transaction():
             dates.append([line.split('|')[0].split('-')[0], line.split('|')[0].split('-')[2]])
             sort.append(int(line.split('|')[0].split('-')[2] + line.split('|')[0].split('-')[0]))
         dates = [dates for _, dates in sorted((zip(sort, dates)))]
-        return set(map(tuple, dates))
+        return [ele for ele in reversed(set(map(tuple, dates)))]
