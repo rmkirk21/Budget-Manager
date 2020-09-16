@@ -17,7 +17,13 @@
         </nav>
         <main>
             <h1>Transactions</h1>
-            {% for x in session["transaction_months"] %}
+            {% for x in range(session["display_transaction_months_length"]) %}
+            <form action="#" method="post">
+              <p><input type="submit" name="{{x}}" value="{{session['display_transaction_months'][x]}}"></p>
+            </form>
+            {% endfor %}
+            <h1>The chosen month</h1>
+            {% for x in session["month_to_display"] %}
             <p>{{x}}</p>
             {% endfor %}
         </main>
