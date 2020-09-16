@@ -58,6 +58,7 @@ def home():
     # transaction options
     if request.method == "POST":
         if "add_transaction" in request.form:
+            print(request.form)
             return redirect(url_for("addTransaction"))
         elif "view_transactions" in request.form:
             return redirect(url_for("viewTransactions"))
@@ -107,6 +108,33 @@ def addTransaction():
 def viewTransactions():
     session["recent_transactions"] = Transaction(session["username"]).TransactionHistory()
     session["transaction_months"] = Transaction(session["username"]).TransactionsMonths()
+
+    # create a list of transaction months for display
+    temp = []
+    for i in session["transaction_months"]:
+        temp.append(i[0] + '_' + i[1])
+    session["display_transaction_months"] = temp
+
+    # some probably redundant code
+    session["display_month_numbers"] = []
+    for i in range(len(session["display_transaction_months"])):
+        session["display_month_numbers"].append(str(i))
+
+    session["display_transaction_months_length"] = len(session["display_transaction_months"])
+
+    print(session["display_month_numbers"])
+
+    if request.method == "POST":
+        print("yes")
+        for i in session["display_month_numbers"]:
+            print(request.form)
+            if i in request.form:
+                print(session["transaction_months"])
+                session["temp_month"] = session["transaction_months"][int(i)]
+                print(session["temp_month"])
+
+        session["month_to_display"] = Transaction(session["username"]).MonthlyTransactionHistory(session["temp_month"][0], session["temp_month"][1])
+
     return render_template("viewTransactions.html")
 
 
@@ -121,8 +149,7 @@ def editBudget():
         if "add_budgetItem" in request.form:
             return redirect(url_for("addBudgetItem"))
         else:
-            session["budget_items"] = Budget(session["username"]).get_budget_items()
-            return render_template("editBudget.html")
+            return redirect(url_for("addBudgetItem"))
     else:
         session["budget_items"] = Budget(session["username"]).get_budget_items()
         return render_template("editBudget.html")
