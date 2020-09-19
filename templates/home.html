@@ -8,47 +8,48 @@
     <link rel="stylesheet" href="../static/styles/home.css">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="header-nav">
-          <nav>
-              <h1 class="header-name">Budget Manager</h1>
-              <div class="header-items">
-                  <p><a href="home" class="header-item1">Home</a></p>
-                  <p><a href="viewTransaction" class="header-item2">View Transactions</a></p>
-                  <p><a href="editBudget" class="header-item3">Budget</a></p>
-                  <p><a href="logout" class="header-item4">Logout</a></p>
-              </div>
-          </nav>
+    <nav>
+        <h1 class="header-name"><a href="home">Budget Manager</a></h1>
+        <div class="header-items">
+            <p><a href="home" class="header-item1">Home</a></p>
+            <p><a href="viewTransaction" class="header-item2">View Transactions</a></p>
+            <p><a href="editBudget" class="header-item3">Budget</a></p>
+            <p><a href="logout" class="header-item4">Logout</a></p>
         </div>
-        <main>
-            <div class="wraper">
-                <h1>Welcome, {{session["username"]}}</h1>
-                <div class="home_transactions">
-                    <h3>Transactions</h3>
-                    {% for x in range(5) %}
-                    <p>{{session["recent_transactions"][x]}}</p>
-                    {% endfor %}
-                    <form action="#" method="post">
-                        <p><input type="submit" name="view_transactions" value="View Transactions"></p>
-                        <p><input type="submit" name="add_transaction" value="Add Transaction"></p>
-                    </form>
+    </nav>
+    <main>
+        <div class="wraper">
+            <h1>Welcome, {{session["username"]}}</h1>
+            <div class="home-transactions">
+                <h3>Transactions</h3>
+                <div class="transactions-list">
+                  {% for x in range(5) %}
+                  <p>{{session["recent_transactions"][x]}}</p>
+                  {% endfor %}
                 </div>
-                <div class="home_overview">
-
-                    <form action="#" method="post">
-                        <p><input type="submit" name="view_previous_months" value="View Previous Months"></p>
-                    </form>
-                </div>
-                <div class="home_budget">
+                <form action="#" method="post">
+                    <p><input class="bttn" type="submit" name="view_transactions" value="View Transactions"></p>
+                    <p><input class="bttn" type="submit" name="add_transaction" value="Add Transaction"></p>
+                </form>
+            </div>
+            <div class="home-overview">
+                <h3>Overview</h3>
+                <form action="#" method="post">
+                    <p><input class="bttn" type="submit" name="view_previous_months" value="View Previous Months"></p>
+                </form>
+            </div>
+            <div class="home-budget">
+                <h3>Budget</h3>
+                <div class="budget-items">
                     {% for x in session["budget_items"] %}
                     <p>{{x}}</p>
                     {% endfor %}
-                    <form action="#" method="post">
-                        <p><input type="submit" name="edit_budget" value="Edit Budget"></p>
-                    </form>
                 </div>
+                <form action="#" method="post">
+                    <p><input class="bttn" type="submit" name="edit_budget" value="Edit Budget"></p>
+                </form>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
 </body>
 </html>
