@@ -1,0 +1,51 @@
+body {
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.home-transactions {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  background-color: #c9c9c9;
+  border: 2px solid #787878;
+}
+
+.home-overview {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  background-color: #c9c9c9;
+  border: 2px solid #787878;
+}
+
+.home-budget {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  background-color: #c9c9c9;
+  border: 2px solid #787878;
+}
+
+.transactions-list {
+  padding: 0px 10px;
+  background-color: #d9d9d9;
+}
+
+.budget-items {
+  padding: 0px 10px;
+  background-color: #d9d9d9;
+}
+
+.bttn {
+  width: 100%
+}
